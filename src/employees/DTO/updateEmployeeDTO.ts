@@ -1,4 +1,4 @@
-import { IsString ,IsNumber,IsEmail,IsNotEmpty, IsDecimal, MinLength } from "class-validator"; 
+import { IsString ,IsNumber,IsEmail,IsNotEmpty, IsDecimal, MinLength, IsOptional } from "class-validator"; 
 
 export class updateUserDTO{
     @IsString()
@@ -14,8 +14,8 @@ export class updateUserDTO{
       @IsNotEmpty()
       position?:string;
   
-      @IsDecimal()
-      @IsNotEmpty()
+      @IsNumber({maxDecimalPlaces:2})
+      @IsOptional()
       salary?:number;
 
 }

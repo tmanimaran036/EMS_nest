@@ -11,13 +11,12 @@ import {
   Req,
 } from '@nestjs/common';
 import { EmployeesService } from './employees.service';
-import { AuthGuard } from 'src/auth/guard/jwt.guard';
+import { AuthGuard } from 'src/auth/guard/jwt.guard';//get id in jwt
 import { employeesDTO } from './DTO/createEmployeeDTO';
 import { updateUserDTO } from './DTO/updateEmployeeDTO';
-import { JwtPayload } from 'src/auth/type';
-// import { Request } from 'express';
+import { Request } from 'express';
 
-@Controller('employees')
+@Controller('api/employees')
 export class EmployeesController {
   constructor(private readonly employeeService: EmployeesService) {}
 
@@ -33,11 +32,19 @@ export class EmployeesController {
   //guard with jwt
   @UseGuards(AuthGuard)
   @Post()
-  create(@Body() createEmployeeDto: employeesDTO, @Req() req: Request) {
-    const user = req.user as JwtPayload; // TypeScript (interferces) knows about it now
-    createEmployeeDto.manager_id = user.userId;
+  create(@Body() createEmployeeDto: employeesDTO, @Req() req: any) {
+     const user = req.user; // TypeScript (interferces) knows about it now
+     console.log(user)
+    createEmployeeDto.manager_id = user.user_id;
     return this.employeeService.create(createEmployeeDto);
   }
+
+
+
+  // @Post()
+  // create(@Body() createEmployeeDto: employeesDTO) {
+  //   return this.employeeService.create(createEmployeeDto);
+  // }
 
   @Put(':id')
   update(

@@ -1,4 +1,4 @@
-import { IsString ,IsNumber,IsEmail, IsOptional ,IsNotEmpty, IsDecimal, MinLength } from "class-validator"; 
+import { IsString ,IsNumber,IsEmail, IsOptional ,IsNotEmpty, MinLength } from "class-validator"; 
 export class employeesDTO{
 
     @IsString()
@@ -14,7 +14,7 @@ export class employeesDTO{
     @IsNotEmpty()
     position:string;
 
-    @IsDecimal()
+    @IsNumber({ maxDecimalPlaces:2}, { message: 'Salary must be a valid number with up to 2 decimal places.' })
     @IsNotEmpty()
     salary:number;
 
