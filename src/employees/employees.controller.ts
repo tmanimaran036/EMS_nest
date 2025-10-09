@@ -14,7 +14,6 @@ import { EmployeesService } from './employees.service';
 import { AuthGuard } from 'src/auth/guard/jwt.guard';//get id in jwt
 import { employeesDTO } from './DTO/createEmployeeDTO';
 import { updateUserDTO } from './DTO/updateEmployeeDTO';
-import { Request } from 'express';
 
 @Controller('api/employees')
 export class EmployeesController {
